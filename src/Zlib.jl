@@ -1,7 +1,7 @@
 
 module Zlib
 
-using Compat
+using Compat; import Compat.String
 
 import Base: read, read!, readuntil, readbytes!, write, close, eof
 

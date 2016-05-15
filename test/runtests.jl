@@ -1,6 +1,6 @@
 using Base.Test
 using Zlib
-using Compat
+using Compat; import Compat.String
 
 data = convert(Vector{UInt8}, rand(1:255, 1000000))
 decompressed = decompress(compress(data))
@@ -53,8 +53,8 @@ seekstart(b)
 r = Zlib.Reader(b)
 @test_throws ErrorException write(r, convert(UInt8, 20))
 for x in data
-    if typeof(x) == ASCIIString
-        @test x == ASCIIString(read(r, UInt8, length(x)))
+    if typeof(x) == String
+        @test x == String(read(r, UInt8, length(x)))
     elseif typeof(x) <: Array
         y = similar(x)
         y[:] = 0
